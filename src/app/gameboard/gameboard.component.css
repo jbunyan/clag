@@ -1,6 +1,6 @@
 .main-container {
-  --card-height: 15vh;
-  --card-width: 5vw; 
+  --card-height: 20vh;
+  --card-width: 7vw; 
   position: absolute;
   top: 0;
   left: 0;
@@ -25,15 +25,15 @@
   top: 10vh;
   left: 10px;
   height: 87vh;
-  width: 15vw;
+  width: 25vw;
   background-color: lightgrey;
 }
 
 .game-board {
   position: absolute;
   top: 3vh;
-  left: 18vw;
-  width: 80vw;
+  left: 25vw;
+  width: 75vw;
   height: var(--game-board-height);
 }
 
@@ -93,14 +93,9 @@
 }
 
 .my-hand {
-  position: absolute;
-  top: 74vh;
-  left: 0;
+  position: relative;
   height: 20vh;
   width: 100%;
-  display: flex;
-  justify-content: baseline;
-  align-items: center;
   padding-left: 3vw;
   box-sizing: border-box;
   border: 1px solid lightgrey;
@@ -108,29 +103,37 @@
 }
 
 .myhand-card {
-  position: relative;
+  --card-width-offset: 0.3;
+  --card-height-offset: 0.2;
+  position: absolute;
 }
 
 .myhand-card:nth-child(1) {
   left: 0;
 }
 .myhand-card:nth-child(2) {
-  left: calc(-0.5*(var(--card-width)));
+  left: calc((var(--card-width-offset))*(var(--card-width)));
+  top: calc((var(--card-height-offset))*(var(--card-height)));
 }
 .myhand-card:nth-child(3) {
-  left: calc(-1*(var(--card-width)));
+  left: calc((var(--card-width-offset))*(var(--card-width)));
+  top: calc((var(--card-height-offset))*(var(--card-height)));
 }
 .myhand-card:nth-child(4) {
-  left: calc(-1.5*(var(--card-width)));
+  left: calc((var(--card-width-offset))*(var(--card-width)));
+  top: calc((var(--card-height-offset))*(var(--card-height)));
 }
 .myhand-card:nth-child(5) {
-  left: calc(-2*(var(--card-width)));
+  left: calc((var(--card-width-offset))*(var(--card-width)));
+  top: calc((var(--card-height-offset))*(var(--card-height)));
 }
 .myhand-card:nth-child(6) {
-  left: calc(-2.5*(var(--card-width)));
+  left: calc((var(--card-width-offset))*(var(--card-width)));
+  top: calc((var(--card-height-offset))*(var(--card-height)));
 }
 .myhand-card:nth-child(7) {
-  left: calc(-3*(var(--card-width)));
+  left: calc((var(--card-width-offset))*(var(--card-width)));
+  top: calc((var(--card-height-offset))*(var(--card-height)));
 }
 
 .play-card {

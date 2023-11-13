@@ -22,13 +22,25 @@
         <option *ngFor="let p of predictionRange" [ngValue]="p">{{p}}</option>
       </select>
     </div>
+
+    <div *ngIf="myHand && myHand.length > 0" class="trumps"><div>Trumps</div><div [ngStyle]="trumpsStyle">{{trumps}}</div></div>
+
+    <div class="my-hand">
+      <div>
+        <ng-template ngFor let-card [ngForOf]="myHand">
+          <component-card (click)="cardSelected(card)" class="myhand-card" [value]="card" [hidden]="false" [selected]="false" [playable]="true"></component-card>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="play-card" *ngIf="playCardRequested">
+      <p>Your turn!...</p>
+    </div>
   </div>
 
   <div class="game-board">
 
     <div class="playing-area">
-
-      <div>RoundState: {{roundState}}</div>
 
       <div class="players">
         <ng-template ngFor let-player let-i="index" [ngForOf]="players">
@@ -44,19 +56,6 @@
 
     </div>
 
-    
-    <div class="my-hand">
-      <div *ngIf="myHand && myHand.length > 0" class="trumps"><div>Trumps</div><div [ngStyle]="trumpsStyle">{{trumps}}</div></div>
-      <div>
-        <ng-template ngFor let-card [ngForOf]="myHand">
-          <component-card (click)="cardSelected(card)" class="myhand-card" [value]="card" [hidden]="false" [selected]="false" [playable]="true"></component-card>
-        </ng-template>
-      </div>
-    </div>
-
-    <div class="play-card" *ngIf="playCardRequested">
-      <p>Your turn!...</p>
-    </div>
   </div>
 
   <div class="scoreboard">
