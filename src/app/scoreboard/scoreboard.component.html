@@ -1,0 +1,11 @@
+<div class="scoreboard" [hidden]="scoreboard.hidden">
+  <div class="scoreboard-players">
+    <div *ngFor="let p of scoreboard.players" class="scoreboard-player">{{p.getName()}}</div>
+  </div>
+  <ng-template ngFor let-round [ngForOf]="scoreboard.scores">
+    <div *ngFor="let s of round">{{s.prediction}},{{s.made}},{{s.score}}</div>
+  </ng-template>
+  <div class="scoreboard-controls">
+    <button (click)="hide()" value="hide">Hide</button>
+  </div>
+</div>

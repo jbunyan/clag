@@ -1,0 +1,148 @@
+.main-container {
+  --card-height: 15vh;
+  --card-width: 5vw; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: green;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  color: white;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2em;
+  height: 15vh;
+}
+
+.lhs-panel {
+  position: absolute;
+  top: 10vh;
+  left: 10px;
+  height: 87vh;
+  width: 15vw;
+  background-color: lightgrey;
+}
+
+.game-board {
+  position: absolute;
+  top: 3vh;
+  left: 18vw;
+  width: 80vw;
+  height: var(--game-board-height);
+}
+
+.trumps {
+  margin-right: 2vw;
+  height: 3vh;
+  width: 5vw;
+  color: white;
+  border-radius: 1vh;
+  padding: 1vw 1vh 1vw 1vh;
+  display: flex;
+  justify-content: space-between;
+  font-size: clamp(0.5rem, 2vw, 1rem);
+}
+
+.player-container {
+  --player-height: calc(var(--playing-area-height)/5);
+  height: var(--player-height);
+  width: 25%;
+  transform: translate(-50%,-50%);
+}
+
+.player-0 {
+  position: absolute;
+  top: calc(var(--player-height)/2);
+  left: 50%;
+}
+
+.player-1 {
+  position: absolute;
+  top: calc(var(--playing-area-height)/2);
+  left: 85%;
+}
+
+.player-2 {
+  position: absolute;
+  top: calc(var(--playing-area-height) - (var(--player-height)/2));
+  left: 50%;
+}
+
+.player-3 {
+  position: absolute;
+  top: calc(var(--playing-area-height)/2);
+  left: 15%;
+}
+
+.scores {
+  visibility: hidden;
+}
+
+.playing-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--playing-area-height);
+  width: 100%;
+}
+
+.my-hand {
+  position: absolute;
+  top: 74vh;
+  left: 0;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  padding-left: 3vw;
+  box-sizing: border-box;
+  border: 1px solid lightgrey;
+  border-radius: 2vh;
+}
+
+.myhand-card {
+  position: relative;
+}
+
+.myhand-card:nth-child(1) {
+  left: 0;
+}
+.myhand-card:nth-child(2) {
+  left: calc(-0.5*(var(--card-width)));
+}
+.myhand-card:nth-child(3) {
+  left: calc(-1*(var(--card-width)));
+}
+.myhand-card:nth-child(4) {
+  left: calc(-1.5*(var(--card-width)));
+}
+.myhand-card:nth-child(5) {
+  left: calc(-2*(var(--card-width)));
+}
+.myhand-card:nth-child(6) {
+  left: calc(-2.5*(var(--card-width)));
+}
+.myhand-card:nth-child(7) {
+  left: calc(-3*(var(--card-width)));
+}
+
+.play-card {
+  position: relative;
+  top: 150px;
+}
+
+.current-trick {
+  position: absolute;
+  top: calc((var(--playing-area-height))/2);
+  left: 50%;
+  height: 20vh;
+  width: 20vw;
+  transform: translate(-50%,-50%);
+}

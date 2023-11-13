@@ -1,0 +1,71 @@
+.player {
+  position: absolute;
+  width: 100%;
+  height: var(--player-height);
+  background-color: darkgrey;
+  color: white;
+  border-radius: 1vw;
+  background-color: darkgrey;
+  padding: 0.5vh 0 0.5vh 0;
+}
+
+.player-lhs {
+  position: absolute;
+  top: 0.5vh;
+  left: 0;
+  width: 50%;
+  height: var(--player-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-rhs {
+  position: absolute;
+  top: 0.5vh;
+  left: 50%;
+  width: 50%;
+  height: var(--player-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-svg-container {
+  width: 100%;
+  height: calc(var(--player-height)*0.75);
+  padding: 1vh 1vw 1vh 1vw;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.player-name {
+  width: 100%;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  display: flex;
+  justify-content: center;
+} 
+
+.player-data {
+  box-sizing: border-box;
+  width: 95%;
+  height: calc(var(--player-height)/3.2);
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightcyan;
+  padding: 0 1vw 0 1vw;
+  border-radius: 2vw;
+  color: black;
+  font-size: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.player-dealer {
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
+}
