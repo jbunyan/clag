@@ -47,7 +47,7 @@
   font-size: clamp(1rem, 2vw, 1.5rem);
   display: flex;
   justify-content: center;
-} 
+}
 
 .player-data {
   box-sizing: border-box;
@@ -68,4 +68,8 @@
   border-style: solid;
   border-width: 2px;
   border-color: red;
+}
+
+.player-highlight {
+  border: 3px red solid;
 }

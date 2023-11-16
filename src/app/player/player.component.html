@@ -6,9 +6,9 @@
     </div>
     <div *ngIf="(roundState === ROUND_STATE.PREDICTIONS_COMPLETE )
       || (roundState === ROUND_STATE.IN_PROGRESS)" class="player-svg-container">
-      <smilie-component *ngIf="player.getCurrentPrediction() > player.getTricksWon()" [expression]="'frown'"></smilie-component>
+      <smilie-component *ngIf="player.getCurrentPrediction() > player.getTricksWon()" [expression]="'concerned'"></smilie-component>
       <smilie-component *ngIf="player.getCurrentPrediction() === player.getTricksWon()" [expression]="'smile'"></smilie-component>
-      <smilie-component *ngIf="player.getCurrentPrediction() < player.getTricksWon()" [expression]="'concerned'"></smilie-component>
+      <smilie-component *ngIf="player.getCurrentPrediction() < player.getTricksWon()" [expression]="'frown'"></smilie-component>
     </div>
     <div *ngIf="roundState === ROUND_STATE.COMPLETE" class="player-svg-container">
       <smilie-component *ngIf="player.getCurrentPrediction() !== player.getTricksWon()" [expression]="'frown'"></smilie-component>
@@ -18,7 +18,7 @@
   </div>
   <div class="player-rhs">
     <div *ngIf="player.getCurrentPrediction() !== -1" class="player-data player-prediction"><div>Prediction</div><div>{{player.getCurrentPrediction()}}</div></div>
-    <div *ngIf="player.getCurrentPrediction() !== -1" class="player-data player-tricks-won"><div>Tricks won</div><div>{{player.getTricksWon()}}</div></div>
+    <div *ngIf="player.getCurrentPrediction() !== -1" [ngClass]="flashClass" class="player-data player-tricks-won"><div>Tricks won</div><div>{{player.getTricksWon()}}</div></div>
     <div class="player-data player-score"><div>Score</div><div>{{player.getCurrentScore()}}</div></div>
   </div>
 </div>

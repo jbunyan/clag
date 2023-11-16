@@ -1,31 +1,39 @@
 
-<div class="main-container">
+<div class="registration" *ngIf="myName === 'XXX'">
+  
+  <div class="player-selection">
+    Register:
+    <select [(ngModel)]="myName" class="my-prediction-select" (change)="playerSelected()">
+      <option *ngFor="let name of names" [ngValue]="name">{{name}}</option>
+    </select>
+  </div>
+
+</div>
+
+
+<div class="main-container" *ngIf="myName !== 'XXX'">
 
   <div class="title">Clag</div>
 
   <div class="lhs-panel">
+
     <div class="connection-status">
       <p *ngIf="connection.isConnected()">Connection: Up</p>
       <p *ngIf="!connection.isConnected()">Connection: Down</p>
       <button (click)="newGame()">New Game</button>
-    </div>
-  
-    <div class="player-selection">
-      <select [(ngModel)]="myName" (change)="playerSelected()">
-        <option *ngFor="let name of names" [ngValue]="name">{{name}}</option>
-      </select>
+      
     </div>
 
     <div class="my-prediction" *ngIf="predictionRequested">
       <p>Make prediction!...</p>
-      <select [(ngModel)]="myPrediction" (change)="predictionSelected()">
-        <option *ngFor="let p of predictionRange" [ngValue]="p">{{p}}</option>
+      <select [(ngModel)]="myPrediction" class="my-prediction-select" (change)="predictionSelected()">
+        <optgroup>
+          <option *ngFor="let p of predictionRange" class="prediction-option" [ngValue]="p">{{p}}</option>
+        </optgroup>
       </select>
     </div>
-
-    <div *ngIf="myHand && myHand.length > 0" class="trumps"><div>Trumps</div><div [ngStyle]="trumpsStyle">{{trumps}}</div></div>
-
-    <div class="my-hand">
+        
+    <div class="my-hand" [ngClass]="playCardRequested ? 'my-hand-my-go' : ''">
       <div>
         <ng-template ngFor let-card [ngForOf]="myHand">
           <component-card (click)="cardSelected(card)" class="myhand-card" [value]="card" [hidden]="false" [selected]="false" [playable]="true"></component-card>
@@ -33,25 +41,24 @@
       </div>
     </div>
 
-    <div class="play-card" *ngIf="playCardRequested">
-      <p>Your turn!...</p>
-    </div>
+    <div *ngIf="myHand && myHand.length > 0" class="trumps"><div>Trumps</div><div class="trump-style" [ngStyle]="trumpsStyle">{{trumps}}</div></div>
+
   </div>
 
   <div class="game-board">
 
     <div class="playing-area">
 
+      <div class="current-trick-container">
+        <ng-template ngFor let-card let-i="index" [ngForOf]="currentTrick">
+          <component-card [ngClass]="trickCardClass[i]" [value]="card" [hidden]="false" [selected]="false" [playable]="true"></component-card>
+        </ng-template> 
+      </div>
+
       <div class="players">
         <ng-template ngFor let-player let-i="index" [ngForOf]="players">
           <component-player class="player-container player-{{i}}" [roundState]="roundState" [player]="player"></component-player>
         </ng-template>
-      </div>
-
-      <div class="current-trick">
-        <ng-template ngFor let-card [ngForOf]="currentTrick">
-          <component-card class="myhand-card" [value]="card" [hidden]="false" [selected]="false" [playable]="true"></component-card>
-        </ng-template>      
       </div>
 
     </div>

@@ -28,7 +28,7 @@ export class ConnectionService {
 
   constructor() {
 
-    this.ws = new WebSocket("ws://localhost:8080");
+    this.ws = new WebSocket("wss://clag-production.up.railway.app/");
 				
       this.ws.onopen = function() {
         
@@ -98,6 +98,10 @@ export class ConnectionService {
 
   setMyName(n: string) {
     this.myName = n
+  }
+
+  getMyPlayerId(): number {
+    return this.myPlayerId
   }
 
   getMessageBehaviourSubject(): BehaviorSubject<Message> {

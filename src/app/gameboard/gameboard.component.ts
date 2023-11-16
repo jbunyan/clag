@@ -38,6 +38,8 @@ export class GameboardComponent {
   trumps: string = ""
   trumpsColour: string = ""
   trumpsStyle: {color: string} = {color: ""}
+  trickCardClass: string[][] = []
+  currentDealer!: number
 
   players: PlayerModel[] = []
 
@@ -48,31 +50,48 @@ export class GameboardComponent {
 
     this.connection.getMessageBehaviourSubject().subscribe({
       next: (message:Message) => {
-        switch(message.messageType) {
+        switch(message.messageType) { 
           case "hand": {
             this.roundState = RoundState.PREDICTIONS
             this.myHand = message.data.hand
+            CardUtils.sortHand(this.myHand)
             this.players.forEach(p => {
               p.clearDealer()
               p.setTricksWon(0)
               p.setCurrentPrediction(-1)
             })
+            this.predictions = []
             this.players[message.data.dealer].setDealer()
+            this.currentDealer = message.data.dealer
             this.trumps = CardUtils.getSuitSymbol(message.data.trumps)
             this.trumpsStyle = {color: CardUtils.getSuitColour(message.data.trumps)}
             break
           }
           case "predictionRequest": {
+            // am I the dealer with possible bid restriction?
+            let dealer:boolean = (this.connection.getMyPlayerId() === this.currentDealer)
+            let notAllowed: number = 0
+            if (dealer) {
+              // total up current predictions
+              let total = 0
+              this.predictions.forEach(p => total += p)
+              notAllowed = this.myHand.length - total
+            }
             this.myPrediction = -1
             this.predictionRange = []
             for (let i = 0; i <= this.myHand.length ; i++) {
-              this.predictionRange.push(i);
+              if (dealer) {
+                if (i !== notAllowed) {
+                  this.predictionRange.push(i)      
+                }
+              } else this.predictionRange.push(i);
            }
             this.predictionRequested = true
             break
           }
           case "predictions": {
             this.players[message.data.prediction.playerId].setCurrentPrediction(message.data.prediction.prediction)
+            this.predictions.push(message.data.prediction.prediction)
             let predictionsComplete: boolean = true
             this.players.forEach( p => {
               if (predictionsComplete && (p.getCurrentPrediction() === -1)) {
@@ -89,11 +108,16 @@ export class GameboardComponent {
           case "cardPlayed": {
             this.roundState = RoundState.IN_PROGRESS
             this.currentTrick.push(message.data.card)
+            let i = this.trickCardClass.push([`player-${message.data.playerId}-card`]) - 1
+            setTimeout( () => {
+              this.trickCardClass[i]=["current-trick-card"]
+            },100)
             break
           }
           case "trickResult": {
             setTimeout( () => {
               this.currentTrick = []
+              this.trickCardClass = []
             }, 5000)
             let t = this.players[message.data.trickResult.winningPlayer].getTricksWon()
             this.players[message.data.trickResult.winningPlayer].setTricksWon(t + 1)
@@ -146,6 +170,24 @@ export class GameboardComponent {
 
   cardSelected(card: string) {
     if (this.playCardRequested) {
+      // check for need to follow suit.....
+      if (this.currentTrick.length > 0) {
+        let leadSuit = CardUtils.getSuit(this.currentTrick[0])
+        if (leadSuit !== CardUtils.getSuit(card)) {
+          // not following suit.... does the player have any of the suit to play?
+          let hasSuit: boolean = false
+          for (let i=0; i<this.myHand.length; i++) {
+            if (CardUtils.getSuit(this.myHand[i]) === leadSuit) {
+              hasSuit = true
+              break
+            }
+          }
+          if (hasSuit) {
+            alert("You must follow suit if you can!")
+            return
+          }
+        }
+      }
       this.connection.send("card",{"card":card});
       this.playCardRequested = false
       let index = this.myHand.findIndex(c => c === card)
