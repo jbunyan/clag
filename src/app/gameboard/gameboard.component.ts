@@ -4,6 +4,8 @@ import { PlayerModel } from '../player/player-model';
 import { Scoreboard, ScoreboardEntry } from '../scoreboard/scoreboard.component';
 import { CardUtils } from '../cards/card-utils';
 
+// main component
+
 export enum RoundState {
   INIT,
   PREDICTIONS,
