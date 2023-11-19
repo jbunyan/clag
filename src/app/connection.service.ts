@@ -20,6 +20,9 @@ export class ConnectionService {
   myConnectionId: number = -1
   myName: string = "XXX"
 
+  localServer: string = "ws://localhost:8080"
+  railwayServer: string = "wss://clag-production.up.railway.app/"
+
   messageBehaviourSubject: BehaviorSubject<Message> = new BehaviorSubject({
     messageType: "init"
   })
@@ -28,7 +31,11 @@ export class ConnectionService {
 
   constructor() {
 
-    this.ws = new WebSocket("wss://clag-production.up.railway.app/");
+    let url = window.location.hostname === 'localhost'  ? this.localServer : this.railwayServer
+
+    console.log(`Connecting to: ${url}`)
+
+    this.ws = new WebSocket(url);
 				
       this.ws.onopen = function() {
         

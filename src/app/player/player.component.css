@@ -5,8 +5,8 @@
   background-color: darkgrey;
   color: white;
   border-radius: 1vw;
-  background-color: darkgrey;
   padding: 0.5vh 0 0.5vh 0;
+  box-shadow: 1vw 1vh 2vh black;
 }
 
 .player-lhs {

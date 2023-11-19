@@ -11,6 +11,24 @@
   padding: 0;
 }
 
+.popup-message {
+  position: absolute;
+  width: 25vw;
+  height: 12vh;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%,-50%);
+  background-color: beige;
+  border-radius: 2vh;
+  padding: 2vh;
+  color: black;
+  font-size: 4vh;
+  z-index: 100;
+}
+
 .registration {
   position: absolute;
   top: 0;
@@ -23,6 +41,15 @@
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;  
+}
+
+.registration-connection {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  width: 2vw;
+  height: 2vw;
+  border-radius: 1vw;
 }
 
 .player-selection {
@@ -53,6 +80,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  box-shadow: 1vw 1vh 2vh black;
 }
 
 .lhs-panel {
@@ -176,6 +204,7 @@
   box-sizing: border-box;
   border: 2px solid lightgrey;
   border-radius: 2vh;
+  box-shadow: 1vw 1vh 2vh black;
 }
 
 .my-hand-my-go {
@@ -237,6 +266,7 @@
   position: absolute;
   transition: all 1s ease;
   transition-property: top, left, scale;
+  box-shadow: 1vw 1vh 2vh black;
 }
 
 .current-trick-card:nth-child(1) {
@@ -277,6 +307,7 @@
   background-color: beige;
   color: black;
   font-size: 3vh;
+  box-shadow: 1vw 1vh 2vh black;
 }
 
 .my-prediction-select {
@@ -284,6 +315,14 @@
   width:5vw; 
   vertical-align: middle;
   font-size: 7vh;
+}
+
+.scoreboard {
+  width: 30vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 optgroup {

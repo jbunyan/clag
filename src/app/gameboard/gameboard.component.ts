@@ -30,6 +30,7 @@ export class GameboardComponent {
     scores: [],
     hidden: true
   };
+  scoreboardEnabled: boolean = false;
   roundState: RoundState = RoundState.INIT
   predictionRequested: boolean = false
   predictionRange: number[] = []
@@ -40,6 +41,8 @@ export class GameboardComponent {
   trumpsStyle: {color: string} = {color: ""}
   trickCardClass: string[][] = []
   currentDealer!: number
+  popupMessage: string = ""
+  popupActive: boolean = false;
 
   players: PlayerModel[] = []
 
@@ -129,9 +132,13 @@ export class GameboardComponent {
           }
           case "scoreboard": {
             this.roundState = RoundState.COMPLETE
+            this.scoreboard = {
+              players: [],
+              scores: [],
+              hidden: true
+            }
             this.scoreboard.players = this.players
-            this.scoreboard.scores = message.data.scoreboard
-            this.scoreboard.hidden = true // LEAVE HIDDEN FOR NOW....
+            this.scoreboard.scores = [...message.data.scoreboard]
 
             let lastRound: ScoreboardEntry[] = message.data.scoreboard.pop()
 
@@ -146,6 +153,18 @@ export class GameboardComponent {
         }
       }
     })
+  }
+
+  popup(text: string) {
+    this.popupMessage = text
+    this.popupActive = true
+    setTimeout( () => {
+      this.popupActive = false
+    }, 4000)
+  }
+
+  showScoreboard() {
+    this.scoreboard.hidden = false;
   }
 
   updatePlayers(message: Message) {
@@ -183,7 +202,7 @@ export class GameboardComponent {
             }
           }
           if (hasSuit) {
-            alert("You must follow suit if you can!")
+            this.popup("You must follow suit if you can!")
             return
           }
         }

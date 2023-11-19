@@ -1,5 +1,7 @@
 
 <div class="registration" *ngIf="myName === 'XXX'">
+
+  <div class="registration-connection" [ngStyle]="connection.isConnected() ? {'background-color': '#00ff00'} : {'background-color': '#ff0000'}"></div>
   
   <div class="player-selection">
     Register:
@@ -15,12 +17,17 @@
 
   <div class="title">Clag</div>
 
+  <div *ngIf="popupActive" class="popup-message">
+    {{popupMessage}}
+  </div>
+
   <div class="lhs-panel">
 
     <div class="connection-status">
       <p *ngIf="connection.isConnected()">Connection: Up</p>
       <p *ngIf="!connection.isConnected()">Connection: Down</p>
-      <button (click)="newGame()">New Game</button>
+      <button *ngIf="myName === 'John'" (click)="newGame()">New Game</button>
+      <button (click)="showScoreboard()">Show Scoreboard</button>
       
     </div>
 
