@@ -1,0 +1,6 @@
+Clag client
+
+- note that it has optimisations turned off for production due to trying to keep old browsers in play
+- there is a .browserlist file that tries to maintain this backward compatibility.
+- the client deploys with its own nodejs server (server.js)
+
